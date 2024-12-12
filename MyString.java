@@ -9,7 +9,7 @@ public class MyString {
         System.out.println(countChar(hello, 'z'));
         System.out.println(spacedString(hello));
         //System.out.println(subsetOf("e", "ee"));
-        System.out.println(remove("","hello"));
+        System.out.println(remove("abc","b"));
         //// Put your other tests here.
     }
 
