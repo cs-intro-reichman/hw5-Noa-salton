@@ -1,3 +1,4 @@
+
 /**
  * A library of string functions.
  */
@@ -8,8 +9,6 @@ public class MyString {
         System.out.println(countChar(hello, 'l'));
         System.out.println(countChar(hello, 'z'));
         System.out.println(spacedString(hello));
-        //System.out.println(subsetOf("e", "ee"));
-        System.out.println(remove("abc","b"));
         //// Put your other tests here.
     }
 
@@ -22,8 +21,12 @@ public class MyString {
      * @return the number of times c appears in str
      */
     public static int countChar(String str, char ch) {
-        int count = 0;
-        for (int i=0; i<str.length(); i++){if (str.charAt(i) == ch){count++;}}
+        int count=0;
+        for (int i = 0; i < str.length(); i++) {
+            if (str.charAt(i)==ch) {
+                count++;
+            }
+        }
         return count;
     }
 
@@ -39,13 +42,11 @@ public class MyString {
      * @return true is str1 is a subset of str2, false otherwise
      */
     public static boolean subsetOf(String str1, String str2) {
-        String maxStr = "";
-        String minStr = "";
-         for (int i=0; i<Math.max(str1.length(), str2.length()); i++){
-            if (Math.max(str1.length(), str2.length()) == str1.length()){maxStr = str1; minStr = str2;}
-            else if (Math.max(str1.length(), str2.length()) == str2.length()){maxStr = str2; minStr = str1;}
-            for (int j=0; j<Math.min(str1.length(), str2.length()); j++){if (countChar(maxStr, minStr.charAt(j)) < countChar(minStr, minStr.charAt(j))){return false;}}
-         }
+        for (int i = 0; i < str1.length(); i++) {
+            if (countChar(str2, str1.charAt(i))<countChar(str1,str1.charAt(i))) {
+                return false;
+            }
+        }
         return true;
     }
 
@@ -58,10 +59,16 @@ public class MyString {
      * @return a string consisting of the characters of str, separated by spaces.
      */
     public static String spacedString(String str) {
-        String [] splitedStr = str.split("");
-        String newStr = "";
-        for (int i=0; i<splitedStr.length-1; i++){newStr += splitedStr[i] + " ";}
-        return newStr + splitedStr[splitedStr.length-1];
+        String spaces="";
+        for (int i = 0; i < str.length(); i++) {
+            if (i!=str.length()-1) {
+                spaces+=str.charAt(i)+ " ";
+            }
+            else{
+                spaces+=str.charAt(i);
+            }
+        }
+        return spaces;
     }
   
     /**
@@ -75,9 +82,16 @@ public class MyString {
      * @return a randomly generated string, consisting of 'n' lowercase letters
      */
     public static String randomStringOfLetters(int n) {
-        String rand = "";
-        for (int i=0; i<n; i++){rand += (char) ('a' + (int) (Math.random() * 26));}
-        return rand;
+        String randomWord="";
+        char[]arr=new char[26];
+        for (int i = 0; i < 26; i++) {
+            arr[i]=(char) (97+i);
+        }
+        for (int i = 0; i < n; i++) {
+          int randomIndex = (int) (Math.random() * 26);
+          randomWord+= arr[randomIndex];
+        }
+        return randomWord;
     }
 
     /**
@@ -89,15 +103,17 @@ public class MyString {
      * @param str2 - a string
      * @return a string consisting of str1 minus all the characters of str2
      */
-    public static String remove(String str2, String str1) {
-        String strR = str1;
-       String strMinus = "";
-       for (int i=0; i< str2.length(); i++){
-            if (!subsetOf(String.valueOf(str2.charAt(i)), strR)|| strR == ""){strMinus += str2.charAt(i);}
-            strR = strR.replaceFirst(String.valueOf(str2.charAt(i)), "");
-        
+    public static String remove(String str1, String str2) {
+        String minusWord="";
+       for (int i = 0; i < str1.length(); i++) {
+           if (countChar(str2, str1.charAt(i))==0) {
+               minusWord+=str1.charAt(i);
+           }
+           else{
+            str2=str2.substring(0,str2.indexOf(str1.charAt(i)))+str2.substring(str2.indexOf(str1.charAt(i))+1);
+           }
        }
-        return strMinus;
+        return minusWord;
     }
 
     /**
