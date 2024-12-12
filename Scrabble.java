@@ -74,7 +74,10 @@ public class Scrabble {
 	}
 
 	public static Boolean containsChar(String hand, char ch){
-		return MyString.subsetOf(String.valueOf(ch), hand);
+		for (int i=0; i<hand.length(); i++){
+			if (hand.charAt(i)==ch){return true;}
+		
+		} return false;
 	}
 	
     // Runs a single hand in a Scrabble game. Each time the user enters a valid word:
