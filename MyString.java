@@ -9,7 +9,7 @@ public class MyString {
         System.out.println(countChar(hello, 'z'));
         System.out.println(spacedString(hello));
         //System.out.println(subsetOf("e", "ee"));
-        System.out.println(remove("meet","committee"));
+        System.out.println(remove("","hello"));
         //// Put your other tests here.
     }
 
@@ -38,7 +38,7 @@ public class MyString {
      * @param str2 - a string
      * @return true is str1 is a subset of str2, false otherwise
      */
-    public static boolean subsetOf(String str1, String str2) {
+    public static boolean subsetOf(String str2, String str1) {
         String maxStr = "";
         String minStr = "";
          for (int i=0; i<Math.max(str1.length(), str2.length()); i++){
